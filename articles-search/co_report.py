@@ -8,8 +8,9 @@ def main():
     jd = journal.JournalData()
     jd.import_known_journals('all-papers-2018-with-field-of-study.json')
     jd.gather_publisher_ids()
-    jd.get_publisher_names()
+    publishers = jd.get_publisher_names()
 
+    print publishers
     co_info = co.Copyright()
     co_info.query_by_journal_title()
 

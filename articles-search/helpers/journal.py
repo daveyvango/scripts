@@ -35,14 +35,16 @@ class JournalData():
                     for field_of_study in article['F']:
                         fos = fos + field_of_study['FN'] + ", "
         
-                print(article['DN'] + "|" + authors + "|" + fos + "|" + str(article['J']['JId']) + "|" + article['J']['JN'])
+                #print(article['DN'] + "|" + authors + "|" + fos + "|" + str(article['J']['JId']) + "|" + article['J']['JN'])
                 self.publisher_ids[str(article['J']['JId'])] = '1'
 
         print "There are " + str(len(self.publisher_ids)) + " unique publishers"
 
     def get_publisher_names(self):
+        publishers = {}
         publisher_ids = self.publisher_ids
         query = 'Or('
+
         for publisher in publisher_ids:
             # Sleep in between as to keep rate limit low and avoid API costs
             time.sleep(1)
@@ -53,9 +55,14 @@ class JournalData():
             pub_details = r.json()
             if 'entities' in pub_details:
                 for publisher in pub_details['entities']:
-                    print str(publisher['Id']) + "|" + publisher['JN'] + "|" + publisher['DJN']
+                    #print str(publisher['Id']) + "|" + publisher['JN'] + "|" + publisher['DJN']
+                    publishers[str(publisher['Id'])] = {}
+                    publishers[str(publisher['Id'])]['journal_display_name'] = publisher['DJN'] 
+                    publishers[str(publisher['Id'])]['journal_name']         = publisher['JN']
             else:
                 print pub_details
+
+        return publishers
         
 #print query
 #
