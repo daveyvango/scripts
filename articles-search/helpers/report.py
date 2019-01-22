@@ -1,31 +1,43 @@
 import xml.etree.ElementTree as ET
 import glob
 
-xml_files = glob.glob("journals_xml/*.xml")
+class Report():
 
-print 'Title|Zetocpub|Romeopub|Publisher|Pre-archving|Post-Archiving|PDF-Archvigin|Conditions'
-for xml_file in xml_files:
+    def write_delimitted(self, delimiter):
 
-    tree = ET.parse(xml_file)
-    root = tree.getroot()
+        delimiter = delimiter
+        xml_files = glob.glob("journals_xml/*.xml")
+        labels    = ['Title', 'Zetocpub', 'Romeopub',
+                     'Publisher', 'Pre-archving', 'Post-Archiving', 
+                     'PDF-Archvigin', 'Conditions']
 
-    for journal in root.find('journals'):
-        jtitle   = journal.find('jtitle').text
-        zetocpub = journal.find('zetocpub').text
-        romeopub = journal.find('romeopub').text
-    
-        for publisher in root.find('publishers'):
-            conditions = ''
-            pub_name = publisher.find('name').text
-            pub_prearchiving  = publisher.find('preprints').find('prearchiving').text
-            pub_postarchiving = publisher.find('postprints').find('postarchiving').text
-            pub_pdfarchiving  = publisher.find('pdfversion').find('pdfarchiving').text
-            condition_count = 0
-            for condition in publisher.find('conditions'):
-                conditions = conditions + " <BREAK> " + condition.text
-    
-            print jtitle + "|" + zetocpub + "|" + romeopub + "|" + pub_name + "|" + pub_prearchiving + "|" + pub_postarchiving + "|" + pub_pdfarchiving + "|" + conditions
+        print delimiter.join(labels)
+        for xml_file in xml_files:
+        
+            tree = ET.parse(xml_file)
+            root = tree.getroot()
+        
+            for journal in root.find('journals'):
+                jtitle   = journal.find('jtitle').text
+                zetocpub = journal.find('zetocpub').text
+                romeopub = journal.find('romeopub').text
+            
+                for publisher in root.find('publishers'):
+                    conditions = ''
+                    pub_name = publisher.find('name').text
+                    pub_prearchiving  = publisher.find('preprints').find('prearchiving').text
+                    pub_postarchiving = publisher.find('postprints').find('postarchiving').text
+                    pub_pdfarchiving  = publisher.find('pdfversion').find('pdfarchiving').text
+                    condition_count = 0
+                    for condition in publisher.find('conditions'):
+                        conditions = conditions + " <BREAK> " + condition.text
+            
+                    #print jtitle + "|" + zetocpub + "|" + romeopub + "|" + pub_name + "|" + pub_prearchiving + "|" + pub_postarchiving + "|" + pub_pdfarchiving + "|" + conditions
+                    print delimiter.join([ jtitle, zetocpub, romeopub, pub_name, pub_prearchiving, 
+                                           pub_postarchiving, pub_pdfarchiving, conditions ])
+       
 
+# Example output from SHERPA/RoMEO
 #  <journals>
 #    <journal>
 #      <jtitle>Journal of Drug Delivery Science and Technology</jtitle>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>jtitle</parametername>
+        <parametervalue>Fusion Science and Technology</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>qtype</parametername>
+        <parametervalue>exact</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message />
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>22-Jan-2019:18:10:17</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Fusion Science and Technology</jtitle>
+      <issn>1536-1055</issn>
+      <zetocpub>Taylor &amp; Francis: STM, Behavioural Science and Public Health Titles</zetocpub>
+      <romeopub>Taylor &amp;amp; Francis: STM, Behavioural Science and Public Health Titles</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="1141"  parentid="76">
+      <name>Taylor &amp; Francis</name>
+      <alias>STM, Behavioural Science and Public Health Titles</alias>
+      <homeurl>http://www.tandf.co.uk/journals/default.asp</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>cannot</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>Some individual journals may have policies prohibiting pre-print archiving</condition>
+        <condition>On author's personal website or departmental website immediately</condition>
+        <condition>On institutional repository, subject-based repository or academic social network (Mendeley, ResearchGate or Academia.edu) after &lt;num&gt;12&lt;/num&gt; &lt;period units=&quot;month&quot;&gt;months&lt;/period&gt; embargo</condition>
+        <condition>Publisher's version/PDF cannot be used</condition>
+        <condition>On a non-profit server</condition>
+        <condition>Published source must be acknowledged</condition>
+        <condition>Must link to publisher version</condition>
+        <condition>Set statements to accompany deposits (see policy)</condition>
+        <condition>The publisher will deposit in on behalf of authors to a designated institutional repository including PubMed Central, where a deposit agreement exists with the repository</condition>
+        <condition>STM: Science, Technology and Medicine</condition>
+        <condition>Publisher last contacted on 25/03/2014</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl>http://authorservices.taylorandfrancis.com/publishing-open-access-with-taylor-francis/</paidaccessurl>
+        <paidaccessname>Taylor &amp; Francis Open Select</paidaccessname>
+        <paidaccessnotes>A paid open access option is available for this journal.</paidaccessnotes>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Policy</copyrightlinktext>
+          <copyrightlinkurl>http://authorservices.taylorandfrancis.com/sharing-your-work/</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2011-11-29 15:55:45</dateadded>
+      <dateupdated>2014-03-26 10:09:45</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>
