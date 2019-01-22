@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE romeoapi SYSTEM "http://www.sherpa.ac.uk/romeo/romeoapi293.dtd">
+<romeoapi version="2.9.9">
+  <header>
+    <parameters>
+      <parameter source="specified">
+        <parametername>jtitle</parametername>
+        <parametervalue>Journal of Synchrotron Radiation</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>qtype</parametername>
+        <parametervalue>exact</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>showfunder</parametername>
+        <parametervalue>none</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>fIDnum</parametername>
+        <parametervalue>|</parametervalue>
+      </parameter>
+      <parameter source="default">
+        <parametername>la</parametername>
+        <parametervalue>en</parametervalue>
+      </parameter>
+    </parameters>
+    <numhits>1</numhits>
+    <apicontrol>journal</apicontrol>
+    <outcome>singleJournal</outcome>
+    <message />
+    <licence>SHERPA/RoMEO data is available for re-use under a Creative Commons Attribution-Non-Commercial-Share Alike 2.5 licence. For more details, please see the 'conditions for re-use' at the &lt;licenceurl /&gt;, and linked-to from the SHERPA/RoMEO home page.</licence>
+    <licenceurl>http://www.sherpa.ac.uk/romeoreuse.html</licenceurl>
+    <disclaimer>All SHERPA/RoMEO information is correct to the best of our knowledge but should not be relied upon for legal advice. SHERPA cannot be held responsible for the re-use of RoMEO data, or for alternative interpretations which are derived from this information.</disclaimer>
+    <timestamp>22-Jan-2019:18:10:17</timestamp>
+  </header>
+  <journals>
+    <journal>
+      <jtitle>Journal of Synchrotron Radiation</jtitle>
+      <issn>0909-0495</issn>
+      <zetocpub>International Union of Crystallography</zetocpub>
+      <romeopub>International Union of Crystallography</romeopub>
+    </journal>
+  </journals>
+  <publishers>
+    <publisher id="332">
+      <name>International Union of Crystallography</name>
+      <alias />
+      <homeurl>http://www.iucr.org/</homeurl>
+      <preprints>
+        <prearchiving>can</prearchiving>
+        <prerestrictions />
+      </preprints>
+      <postprints>
+        <postarchiving>can</postarchiving>
+        <postrestrictions />
+      </postprints>
+      <pdfversion>
+        <pdfarchiving>can</pdfarchiving>
+        <pdfrestrictions />
+      </pdfversion>
+      <conditions>
+        <condition>On author's personal website, employer's website, employer's repository, or subject-based repository</condition>
+        <condition>Publisher's version/PDF may be used (authorised electronic re-print) (preferred)</condition>
+        <condition>Publisher's version/PDF (authorised electronic re-print) on PubMed Central and related servers</condition>
+        <condition>Pre-print must acknowledge submission to journal</condition>
+        <condition>Must link to publisher version on IUCr server</condition>
+        <condition>Published source must be acknowledged with citation</condition>
+        <condition>Publisher last contacted on 23/04/2014</condition>
+      </conditions>
+      <mandates />
+      <paidaccess>
+        <paidaccessurl>http://journals.iucr.org/services/openaccess.html</paidaccessurl>
+        <paidaccessname>Open Access</paidaccessname>
+        <paidaccessnotes>A paid open access option is available for this journal.</paidaccessnotes>
+      </paidaccess>
+      <copyrightlinks>
+        <copyrightlink>
+          <copyrightlinktext>Copyright Policy</copyrightlinktext>
+          <copyrightlinkurl>http://journals.iucr.org/services/copyrightpolicy.html</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>author rights</copyrightlinktext>
+          <copyrightlinkurl>http://journals.iucr.org/services/authorrights.html</copyrightlinkurl>
+        </copyrightlink>
+        <copyrightlink>
+          <copyrightlinktext>NIH Policy</copyrightlinktext>
+          <copyrightlinkurl>http://journals.iucr.org/services/nihpolicy.html</copyrightlinkurl>
+        </copyrightlink>
+      </copyrightlinks>
+      <romeocolour>green</romeocolour>
+      <dateadded>2007-06-01 00:00:00</dateadded>
+      <dateupdated>2014-04-25 14:17:30</dateupdated>
+    </publisher>
+  </publishers>
+</romeoapi>
