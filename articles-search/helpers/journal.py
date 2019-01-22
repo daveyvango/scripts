@@ -13,8 +13,17 @@ def main():
 class JournalData():
     
     def __init__(self):   
-        self.publisher_ids = {}
-        self.articles = {}
+        self.journal_ids = {}
+        self.articles      = {}
+        self.api_key       = os.environ['MS_ACADEMIC_KEY']
+ 
+
+    def pull_articles_from_net(self, institution):
+        url         = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=And(Y=2018,Composite(AA.AfN=\'' + institution + '\'))&model=latest&count=10&offset=0&attributes=Id,AA.AfN,AA.AuN,J.JN,J.JId'
+        headers     = {'Ocp-Apim-Subscription-Key': self.api_key }
+        r           = requests.get( url, headers=headers )
+        journals    = r.json()
+	self.articles = journals
 
     def import_known_journals(self, file_name):
         articles_file = open(file_name)
@@ -22,7 +31,7 @@ class JournalData():
 
         self.articles      = json.loads(articles_str)
 
-    def gather_publisher_ids(self):
+    def gather_journal_ids(self):
         for article in self.articles['entities']:
             if 'J' in article:
 	        authors = ''
@@ -36,41 +45,33 @@ class JournalData():
                         fos = fos + field_of_study['FN'] + ", "
         
                 #print(article['DN'] + "|" + authors + "|" + fos + "|" + str(article['J']['JId']) + "|" + article['J']['JN'])
-                self.publisher_ids[str(article['J']['JId'])] = '1'
+                self.journal_ids[str(article['J']['JId'])] = '1'
 
-        print "There are " + str(len(self.publisher_ids)) + " unique publishers"
+        print "There are " + str(len(self.journal_ids)) + " unique journals"
 
-    def get_publisher_names(self):
-        publishers = {}
-        publisher_ids = self.publisher_ids
+    def get_journal_names(self):
+        journals = {}
+        journal_ids = self.journal_ids
         query = 'Or('
 
-        for publisher in publisher_ids:
+        for journal in journal_ids:
             # Sleep in between as to keep rate limit low and avoid API costs
             time.sleep(1)
-            url         = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=Id=' + publisher + '&model=latest&count=10&offset=0&attributes=Id,DJN,JN'
-            query       = query + "Id=" + publisher + ","
+            url         = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=Id=' + journal + '&model=latest&count=10&offset=0&attributes=Id,DJN,JN'
+            query       = query + "Id=" + journal + ","
             headers     = {'Ocp-Apim-Subscription-Key': os.environ['MS_ACADEMIC_KEY']}
             r           = requests.get( url, headers=headers )
             pub_details = r.json()
             if 'entities' in pub_details:
-                for publisher in pub_details['entities']:
-                    #print str(publisher['Id']) + "|" + publisher['JN'] + "|" + publisher['DJN']
-                    publishers[str(publisher['Id'])] = {}
-                    publishers[str(publisher['Id'])]['journal_display_name'] = publisher['DJN'] 
-                    publishers[str(publisher['Id'])]['journal_name']         = publisher['JN']
+                for journal in pub_details['entities']:
+                    journals[str(journal['Id'])] = {}
+                    journals[str(journal['Id'])]['journal_display_name'] = journal['DJN'] 
+                    journals[str(journal['Id'])]['journal_name']         = journal['JN']
+                    journals[str(journal['Id'])]['id']                   = str(journal['Id'])
             else:
                 print pub_details
 
-        return publishers
-        
-#print query
-#
-#url = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=Id=' + publisher + '&model=latest&count=10&offset=0&attributes=Id,DJN,JN'
-#headers = {'Ocp-Apim-Subscription-Key': 'e32c2067223844f7bcd373114673cfd0'}
-#print url
-#r = requests.get( url, headers=headers )
-#pub_details = r.json()
+        return journals
 
 if __name__ == "__main__":
     main()

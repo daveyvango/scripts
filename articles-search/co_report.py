@@ -6,13 +6,13 @@ def main():
     """
     
     jd = journal.JournalData()
-    jd.import_known_journals('all-papers-2018-with-field-of-study.json')
-    jd.gather_publisher_ids()
-    publishers = jd.get_publisher_names()
+    jd.pull_articles_from_net('northern illinois university')
+    jd.gather_journal_ids()
+    journals = jd.get_journal_names()
 
-    print publishers
+    print journals
     co_info = co.Copyright()
-    co_info.query_by_journal_title()
+    co_info.query_co_by_journal_title(journals)
 
     co_report = report.Report()
     co_report.write_delimitted('|')
