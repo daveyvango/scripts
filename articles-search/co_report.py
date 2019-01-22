@@ -5,8 +5,8 @@ def main():
     A direct call to main should be the main entrypoint for this tool
     """
     
-    jd = journal.JournalData()
-    jd.pull_articles_from_net('northern illinois university')
+    jd = journal.JournalData('northern illinois university')
+    jd.pull_articles_from_net()
     jd.gather_journal_ids()
     journals = jd.get_journal_names()
 
