@@ -38,7 +38,7 @@ class JournalData():
 	# build up the URL for the API call
         url = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate'	
         url = url + '?expr=And(Y=' + str(year) + ',Composite(AA.AfN=\'' + self.institution + '\'))'
-        url = url + '&model=latest&count=' + str(count) + '&offset=0&attributes=Id,AA.AfN,AA.AuN,J.JN,J.JId,E.DN'
+        url = url + '&model=latest&count=' + str(count) + '&offset=0&attributes=Id,AA.AfN,AA.AuN,J.JN,J.JId,E.DN,F.FN'
 
 	# We need to establish credentials with Microsoft ahead of time
         headers       = {'Ocp-Apim-Subscription-Key': self.api_key }

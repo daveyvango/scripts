@@ -74,7 +74,7 @@ class Report():
             tree = ET.parse('journals_xml/' + str(journal_id) + '.xml')
             root = tree.getroot()
 	  
-	    if root.find('journals') is not None: 
+	    if root.find('journals'): 
             	for journal in root.find('journals'):
                     jtitle   = journal.find('jtitle').text
                     zetocpub = journal.find('zetocpub').text
