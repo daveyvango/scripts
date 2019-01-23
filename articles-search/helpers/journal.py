@@ -14,14 +14,15 @@ def main():
 
 class JournalData():
     """
-    We'll use this for gathering information from Microsoft academic
+    Keep track of articles and journal information
     """
     
     def __init__(self, institution):   
-        self.journal_ids = {}
-        self.articles    = {}
-	self.institution = institution
-	# This key needs to be established with microsoft
+	self.institution    = institution
+        self.pared_articles = {}
+        self.journal_ids    = {}
+        self.articles       = {}
+	# This key needs to be established with Microsoft
         self.api_key     = os.environ['MS_ACADEMIC_KEY']
  
 
@@ -30,31 +31,38 @@ class JournalData():
 	Create GET request for pulling available data from Microsoft Academic
 	
 	params:
-	year        = year to search, if blank
-	count       = number of records to return
+	year  = year to search
+	count = number of records to return
 	"""
 	
-	# build up the URL
+	# build up the URL for the API call
         url = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate'	
         url = url + '?expr=And(Y=' + str(year) + ',Composite(AA.AfN=\'' + self.institution + '\'))'
-        url = url + '&model=latest&count=' + str(count) + '10&offset=0&attributes=Id,AA.AfN,AA.AuN,J.JN,J.JId'
-	
+        url = url + '&model=latest&count=' + str(count) + '&offset=0&attributes=Id,AA.AfN,AA.AuN,J.JN,J.JId,E.DN'
+
 	# We need to establish credentials with Microsoft ahead of time
         headers       = {'Ocp-Apim-Subscription-Key': self.api_key }
         r             = requests.get( url, headers=headers )
         journals      = r.json()
 	self.articles = journals
 
-    def gather_journal_ids(self):
+    def pare_articles_data(self):
 	"""
 	Parse out journal ids from the journals object.  We'll have to query by the ids to get good Journal names
 	Double check the author's affiliation to ensure it matches your institution
 	"""
+	
+	# We'll end up removing other authors from our articles to just reduce dictionary size
+	article_id     = 0
         for article in self.articles['entities']:
+            article_id = article_id + 1
+	    print str(article_id) + " " + article['DN']
             if 'J' in article:
-	        authors = ''
-	        fos     = ''
+	        authors_count = 0
+	        authors       = ''
+	        fos           = ''
                 for author in article['AA']:
+		    authors_count = authors_count + 1
                     if 'AfN' in author:
 		        if author['AfN'] == self.institution:
 	                    authors = authors + " " + author['AuN'] + "(" + author['AfN'] + ")"
@@ -62,10 +70,18 @@ class JournalData():
                     for field_of_study in article['F']:
                         fos = fos + field_of_study['FN'] + ", "
         
-                #print(article['DN'] + "|" + authors + "|" + fos + "|" + str(article['J']['JId']) + "|" + article['J']['JN'])
+		# build up a smaller articles dictionary
+	        self.pared_articles[str(article_id)] = {}
+	        self.pared_articles[str(article_id)] = { 'display_name': article['DN'], 
+							 'authors_from_institution': authors, 
+							 'field_of_study': fos, 
+							 'authors_count': authors_count, 
+							 'journal_id': article['J']['JId'],
+							 'journal_short_name': article['J']['JN']}
+
                 self.journal_ids[str(article['J']['JId'])] = '1'
 
-        print "There are " + str(len(self.journal_ids)) + " unique journals"
+        print "There are " + str(len(self.journal_ids)) + " unique journals."
 
     def get_journal_names(self):
 	"""
@@ -77,8 +93,8 @@ class JournalData():
         for journal in journal_ids:
             # Sleep in between as to keep rate limit low and avoid API costs
             time.sleep(1)
-            url         = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=Id=' + journal + '&model=latest&count=10&offset=0&attributes=Id,DJN,JN'
-            headers     = {'Ocp-Apim-Subscription-Key': os.environ['MS_ACADEMIC_KEY']}
+            url         = 'https://api.labs.cognitive.microsoft.com/academic/v1.0/evaluate?expr=Id=' + journal + '&model=latest&offset=0&attributes=Id,DJN,JN'
+            headers     = {'Ocp-Apim-Subscription-Key': self.api_key }
             r           = requests.get( url, headers=headers )
             pub_details = r.json()
             if 'entities' in pub_details:
