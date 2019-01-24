@@ -6,6 +6,7 @@ import requests
 import datetime
 import time
 import os
+import sys
 
 # This is a helper, not a main
 def main():
@@ -42,9 +43,20 @@ class JournalData():
 
 	# We need to establish credentials with Microsoft ahead of time
         headers       = {'Ocp-Apim-Subscription-Key': self.api_key }
-        r             = requests.get( url, headers=headers )
-        journals      = r.json()
-	self.articles = journals
+        try:
+            r             = requests.get( url, headers=headers )
+            journals      = r.json()
+        except requests.exceptions.RequestException as e:
+            print "\nERROR: There's an issue with the response.  Check it out and try again." + e
+            sys.exit(1)
+        
+        # Make sure we got a valid response 
+        if 'error' in journals.keys(): 
+            print "\nERROR: The API gave this message: "+ journals['error']['message'] + "\n"
+            sys.exit(1)
+        else:
+	    self.articles = journals
+            
 
     def pare_articles_data(self):
 	"""

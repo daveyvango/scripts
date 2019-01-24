@@ -7,5 +7,5 @@ A utility to gather copyright information of articles created by a given univers
 ## iso-build
 Scripting to generate a kickstart ISO for CentOS
 
-## getroutes.py
+## get-routes
 Simiulating foot traffic on a college campus to generate some data for analysis
