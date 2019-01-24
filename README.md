@@ -1,5 +1,5 @@
 # scripts
-Home for some scripts
+Home for some smaller scripts and projects.  It's also a space to cultivate some ideas before moving things into their own projects.
 
 ## articles-search
 A utility to gather copyright information of articles created by a given university
